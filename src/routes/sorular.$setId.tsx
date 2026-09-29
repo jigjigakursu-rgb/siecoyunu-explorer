@@ -477,11 +477,11 @@ function QuestionsPage() {
             </div>
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:grid lg:grid-cols-2 lg:content-start lg:gap-x-5 lg:gap-y-3 lg:overflow-hidden lg:p-4">
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:grid lg:grid-cols-2 lg:grid-rows-[auto_auto_minmax(0,1fr)] lg:gap-x-5 lg:gap-y-3 lg:overflow-hidden lg:p-4">
             {(error || notice) && (
               <div
                 role="status"
-                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold lg:col-span-2 lg:mb-0 ${
+                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold lg:col-span-2 lg:row-start-1 lg:mb-0 ${
                   error
                     ? "border-studio-danger/60 bg-studio-danger/10 text-studio-danger"
                     : "border-studio-success/60 bg-studio-success/10 text-studio-success"
@@ -492,7 +492,7 @@ function QuestionsPage() {
               </div>
             )}
 
-            <div className="mb-4 flex flex-wrap gap-2 lg:col-span-2 lg:mb-0" role="radiogroup" aria-label="Soru türü">
+            <div className="mb-4 flex flex-wrap gap-2 lg:col-span-2 lg:row-start-2 lg:mb-0" role="radiogroup" aria-label="Soru türü">
               {TYPES.map((t) => {
                 const active = form.question_type === t.id;
                 return (
@@ -519,7 +519,7 @@ function QuestionsPage() {
               })}
             </div>
 
-            <div className="mb-4 lg:col-start-1 lg:mb-0">
+            <div className="mb-4 flex min-h-0 flex-col gap-3 lg:col-start-1 lg:row-start-3 lg:mb-0">
               {form.image_url ? (
                 <div className="relative mx-auto flex h-36 w-full items-center justify-center overflow-hidden rounded-xl border border-studio-line bg-studio-elevated/60 lg:h-40">
                   <img src={form.image_url} alt="Soru fotoğrafı" className="h-full w-full object-contain" />
@@ -561,10 +561,8 @@ function QuestionsPage() {
                   />
                 </label>
               )}
-            </div>
-
-            <div className="lg:col-start-1">
-              <label htmlFor="question-text" className="mb-2 block text-xs font-bold uppercase text-studio-muted">
+              <div className="flex min-h-0 flex-1 flex-col">
+                <label htmlFor="question-text" className="mb-2 block shrink-0 text-xs font-bold uppercase text-studio-muted">
                 Soru metni
               </label>
               <textarea
@@ -573,23 +571,23 @@ function QuestionsPage() {
                 onChange={(event) => set("question", event.target.value)}
                 rows={3}
                 placeholder={form.question_type === "fill" ? "Örn: Türkiye'nin başkenti ____ şehridir." : "Sorunuzu buraya yazın..."}
-                className="h-24 w-full resize-none rounded-xl border border-studio-line bg-studio-elevated/60 p-4 text-lg font-semibold text-studio-ink outline-hidden placeholder:text-studio-muted/60 focus:border-studio-yellow focus:ring-2 focus:ring-studio-yellow/20 sm:text-xl lg:h-16 lg:py-3"
+                className="h-24 w-full flex-1 resize-none rounded-xl border border-studio-line bg-studio-elevated/60 p-4 text-lg font-semibold text-studio-ink outline-hidden placeholder:text-studio-muted/60 focus:border-studio-yellow focus:ring-2 focus:ring-studio-yellow/20 sm:text-xl lg:h-auto lg:min-h-24 lg:py-3"
               />
+              </div>
             </div>
 
-            <div className="mt-5 lg:col-start-2 lg:row-start-3 lg:mt-0">
-              <h2 className="font-studio-display text-base text-studio-ink">
+            <div className="mt-5 flex flex-col lg:col-start-2 lg:row-start-3 lg:mt-0 lg:min-h-0 lg:flex-1">
+              <h2 className="shrink-0 font-studio-display text-base text-studio-ink">
                 {form.question_type === "fill" ? "DOĞRU CEVAPLAR" : form.question_type === "truefalse" ? "DOĞRU MU, YANLIŞ MI?" : "CEVAP SEÇENEKLERİ"}
               </h2>
               {form.question_type === "multiple" && (
-                <p className="mt-1 text-xs text-studio-muted">Birden fazla doğru cevap işaretleyebilirsin.</p>
+                <p className="mt-1 shrink-0 text-xs text-studio-muted">Birden fazla doğru cevap işaretleyebilirsin.</p>
               )}
-              <h2 className="hidden">
-              </h2>
-            </div>
+
+              <div className="mt-3 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
 
             {form.question_type === "fill" && (
-              <div className="mt-4 lg:col-start-2 lg:row-start-4 lg:mt-0">
+              <div className="mt-4 lg:mt-1">
                 <div className="grid gap-2">
                   <input
                     value={form.option_a}
@@ -629,7 +627,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "truefalse" && (
-              <div className="mt-4 grid grid-cols-2 gap-3 lg:col-start-2 lg:row-start-4 lg:mt-0">
+              <div className="mt-4 grid grid-cols-2 gap-3 lg:mt-1">
                 {(["A", "B"] as const).map((letter) => {
                   const correct = form.correct_answer === letter;
                   return (
@@ -647,7 +645,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "multiple" && (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:col-start-2 lg:row-start-4 lg:mt-0 lg:gap-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:mt-1 lg:gap-2">
               {LETTERS.map((letter, index) => {
                 const key = `option_${letter.toLowerCase()}` as "option_a";
                 const value = form[key];
@@ -695,6 +693,8 @@ function QuestionsPage() {
               })}
             </div>
             )}
+              </div>
+            </div>
 
             <div className="mt-5 grid gap-3 border-t border-studio-line pt-4 sm:grid-cols-[auto_1fr] sm:items-center lg:hidden">
               <div className="flex gap-2 sm:hidden">
