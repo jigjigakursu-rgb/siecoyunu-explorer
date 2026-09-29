@@ -519,9 +519,9 @@ function QuestionsPage() {
               })}
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 lg:col-start-1 lg:mb-0">
               {form.image_url ? (
-                <div className="relative mx-auto flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border border-studio-line bg-studio-elevated/60 sm:h-56">
+                <div className="relative mx-auto flex h-36 w-full items-center justify-center overflow-hidden rounded-xl border border-studio-line bg-studio-elevated/60 lg:h-40">
                   <img src={form.image_url} alt="Soru fotoğrafı" className="h-full w-full object-contain" />
                   <button
                     type="button"
@@ -533,7 +533,7 @@ function QuestionsPage() {
                   </button>
                 </div>
               ) : (
-                <label className="flex h-32 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-studio-line bg-studio-elevated/40 text-studio-muted hover:border-studio-yellow hover:text-studio-ink">
+                <label className="flex h-28 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-studio-line bg-studio-elevated/40 text-studio-muted hover:border-studio-yellow hover:text-studio-ink lg:h-32">
                   {uploading ? <Loader2 className="h-7 w-7 animate-spin" /> : <ImagePlus className="h-7 w-7" />}
                   <span className="text-sm font-bold">{uploading ? "Yükleniyor..." : "Fotoğraf ekle (isteğe bağlı)"}</span>
                   <input
@@ -563,7 +563,7 @@ function QuestionsPage() {
               )}
             </div>
 
-            <div>
+            <div className="lg:col-start-1">
               <label htmlFor="question-text" className="mb-2 block text-xs font-bold uppercase text-studio-muted">
                 Soru metni
               </label>
@@ -577,7 +577,7 @@ function QuestionsPage() {
               />
             </div>
 
-            <div className="mt-5 lg:mt-4">
+            <div className="mt-5 lg:col-start-2 lg:row-start-3 lg:mt-0">
               <h2 className="font-studio-display text-base text-studio-ink">
                 {form.question_type === "fill" ? "DOĞRU CEVAPLAR" : form.question_type === "truefalse" ? "DOĞRU MU, YANLIŞ MI?" : "CEVAP SEÇENEKLERİ"}
               </h2>
