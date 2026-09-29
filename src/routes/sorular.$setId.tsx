@@ -477,11 +477,11 @@ function QuestionsPage() {
             </div>
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:p-5">
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:grid lg:grid-cols-2 lg:content-start lg:gap-x-5 lg:gap-y-3 lg:overflow-hidden lg:p-4">
             {(error || notice) && (
               <div
                 role="status"
-                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold ${
+                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold lg:col-span-2 lg:mb-0 ${
                   error
                     ? "border-studio-danger/60 bg-studio-danger/10 text-studio-danger"
                     : "border-studio-success/60 bg-studio-success/10 text-studio-success"
@@ -492,7 +492,7 @@ function QuestionsPage() {
               </div>
             )}
 
-            <div className="mb-4 flex flex-wrap gap-2" role="radiogroup" aria-label="Soru türü">
+            <div className="mb-4 flex flex-wrap gap-2 lg:col-span-2 lg:mb-0" role="radiogroup" aria-label="Soru türü">
               {TYPES.map((t) => {
                 const active = form.question_type === t.id;
                 return (
@@ -519,9 +519,9 @@ function QuestionsPage() {
               })}
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 lg:col-start-1 lg:mb-0">
               {form.image_url ? (
-                <div className="relative mx-auto flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border border-studio-line bg-studio-elevated/60 sm:h-56">
+                <div className="relative mx-auto flex h-36 w-full items-center justify-center overflow-hidden rounded-xl border border-studio-line bg-studio-elevated/60 lg:h-40">
                   <img src={form.image_url} alt="Soru fotoğrafı" className="h-full w-full object-contain" />
                   <button
                     type="button"
@@ -533,7 +533,7 @@ function QuestionsPage() {
                   </button>
                 </div>
               ) : (
-                <label className="flex h-32 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-studio-line bg-studio-elevated/40 text-studio-muted hover:border-studio-yellow hover:text-studio-ink">
+                <label className="flex h-28 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-studio-line bg-studio-elevated/40 text-studio-muted hover:border-studio-yellow hover:text-studio-ink lg:h-32">
                   {uploading ? <Loader2 className="h-7 w-7 animate-spin" /> : <ImagePlus className="h-7 w-7" />}
                   <span className="text-sm font-bold">{uploading ? "Yükleniyor..." : "Fotoğraf ekle (isteğe bağlı)"}</span>
                   <input
@@ -563,7 +563,7 @@ function QuestionsPage() {
               )}
             </div>
 
-            <div>
+            <div className="lg:col-start-1">
               <label htmlFor="question-text" className="mb-2 block text-xs font-bold uppercase text-studio-muted">
                 Soru metni
               </label>
@@ -577,7 +577,7 @@ function QuestionsPage() {
               />
             </div>
 
-            <div className="mt-5 lg:mt-4">
+            <div className="mt-5 lg:col-start-2 lg:row-start-3 lg:mt-0">
               <h2 className="font-studio-display text-base text-studio-ink">
                 {form.question_type === "fill" ? "DOĞRU CEVAPLAR" : form.question_type === "truefalse" ? "DOĞRU MU, YANLIŞ MI?" : "CEVAP SEÇENEKLERİ"}
               </h2>
@@ -589,7 +589,7 @@ function QuestionsPage() {
             </div>
 
             {form.question_type === "fill" && (
-              <div className="mt-4 lg:mt-3">
+              <div className="mt-4 lg:col-start-2 lg:row-start-4 lg:mt-0">
                 <div className="grid gap-2">
                   <input
                     value={form.option_a}
@@ -629,7 +629,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "truefalse" && (
-              <div className="mt-4 grid grid-cols-2 gap-3 lg:mt-3">
+              <div className="mt-4 grid grid-cols-2 gap-3 lg:col-start-2 lg:row-start-4 lg:mt-0">
                 {(["A", "B"] as const).map((letter) => {
                   const correct = form.correct_answer === letter;
                   return (
@@ -647,7 +647,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "multiple" && (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:mt-3 lg:gap-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:col-start-2 lg:row-start-4 lg:mt-0 lg:gap-2">
               {LETTERS.map((letter, index) => {
                 const key = `option_${letter.toLowerCase()}` as "option_a";
                 const value = form[key];
@@ -696,7 +696,7 @@ function QuestionsPage() {
             </div>
             )}
 
-            <div className="mt-5 grid gap-3 border-t border-studio-line pt-4 sm:grid-cols-[auto_1fr] sm:items-center lg:mt-4 lg:pt-3">
+            <div className="mt-5 grid gap-3 border-t border-studio-line pt-4 sm:grid-cols-[auto_1fr] sm:items-center lg:hidden">
               <div className="flex gap-2 sm:hidden">
                 {!draftMode && selectedId && (
                   <>
