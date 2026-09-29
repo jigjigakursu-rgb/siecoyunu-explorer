@@ -589,7 +589,7 @@ function QuestionsPage() {
             </div>
 
             {form.question_type === "fill" && (
-              <div className="mt-4 lg:mt-3">
+              <div className="mt-4 lg:col-start-2 lg:row-start-4 lg:mt-0">
                 <div className="grid gap-2">
                   <input
                     value={form.option_a}
@@ -629,7 +629,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "truefalse" && (
-              <div className="mt-4 grid grid-cols-2 gap-3 lg:mt-3">
+              <div className="mt-4 grid grid-cols-2 gap-3 lg:col-start-2 lg:row-start-4 lg:mt-0">
                 {(["A", "B"] as const).map((letter) => {
                   const correct = form.correct_answer === letter;
                   return (
@@ -647,7 +647,7 @@ function QuestionsPage() {
             )}
 
             {form.question_type === "multiple" && (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:mt-3 lg:gap-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:col-start-2 lg:row-start-4 lg:mt-0 lg:gap-2">
               {LETTERS.map((letter, index) => {
                 const key = `option_${letter.toLowerCase()}` as "option_a";
                 const value = form[key];
@@ -696,7 +696,7 @@ function QuestionsPage() {
             </div>
             )}
 
-            <div className="mt-5 grid gap-3 border-t border-studio-line pt-4 sm:grid-cols-[auto_1fr] sm:items-center lg:mt-4 lg:pt-3">
+            <div className="mt-5 grid gap-3 border-t border-studio-line pt-4 sm:grid-cols-[auto_1fr] sm:items-center lg:hidden">
               <div className="flex gap-2 sm:hidden">
                 {!draftMode && selectedId && (
                   <>
