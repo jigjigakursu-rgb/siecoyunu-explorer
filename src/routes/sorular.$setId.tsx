@@ -477,11 +477,11 @@ function QuestionsPage() {
             </div>
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:p-5">
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-3 sm:p-5 lg:grid lg:grid-cols-2 lg:content-start lg:gap-x-5 lg:gap-y-3 lg:overflow-hidden lg:p-4">
             {(error || notice) && (
               <div
                 role="status"
-                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold ${
+                className={`mb-6 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold lg:col-span-2 lg:mb-0 ${
                   error
                     ? "border-studio-danger/60 bg-studio-danger/10 text-studio-danger"
                     : "border-studio-success/60 bg-studio-success/10 text-studio-success"
@@ -492,7 +492,7 @@ function QuestionsPage() {
               </div>
             )}
 
-            <div className="mb-4 flex flex-wrap gap-2" role="radiogroup" aria-label="Soru türü">
+            <div className="mb-4 flex flex-wrap gap-2 lg:col-span-2 lg:mb-0" role="radiogroup" aria-label="Soru türü">
               {TYPES.map((t) => {
                 const active = form.question_type === t.id;
                 return (
